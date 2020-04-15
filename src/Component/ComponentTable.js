@@ -1,7 +1,15 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 
-export default function ComponentTable({ data }) {
+export default function ComponentTable({ data, exsitedBOM, checkExist }) {
+  const checkIsExsit = (item) => {
+    return (
+      checkExist &&
+      exsitedBOM.filter((existItem) => existItem.smcPn === item.smcPn).length >
+        0
+    );
+  };
+
   return (
     <Table striped bordered hover size="sm" style={{ fontSize: "12px" }}>
       <thead>
@@ -14,7 +22,10 @@ export default function ComponentTable({ data }) {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr key={item.item}>
+          <tr
+            key={item.item}
+            style={checkIsExsit(item) ? { color: "Green" } : { color: "black" }}
+          >
             <th scope="row">{item.item}</th>
             <td>{item.smcPn}</td>
             <td>{item.mfg}</td>

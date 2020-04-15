@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { readxlsx, parseObject } from "../Utils/utilities";
 
-export default function Dropzone({ callback, fileType }) {
+export default function Dropzone({ callback, fileType, setFlag }) {
   const [filename, setFilename] = useState("");
 
   const onDrop = useCallback(
@@ -22,8 +22,10 @@ export default function Dropzone({ callback, fileType }) {
             case "BOM":
               if (retJson.BOM === undefined || retJson.BOM === null) {
                 alert("The file you dropped is wrong");
+                setFlag(false);
               } else {
                 callback(parseObject(retJson));
+                setFlag(true);
               }
               break;
 
@@ -33,8 +35,10 @@ export default function Dropzone({ callback, fileType }) {
                 retJson["Electronic parts"] === null
               ) {
                 alert("The file you dropped/selected is wrong format");
+                setFlag(false);
               } else {
                 callback(retJson);
+                setFlag(true);
               }
               break;
 
@@ -47,7 +51,7 @@ export default function Dropzone({ callback, fileType }) {
       });
       setFilename(acceptedFiles[0].name);
     },
-    [callback, fileType]
+    [callback, fileType, setFlag]
   );
 
   const { getRootProps, getInputProps } = useDropzone({

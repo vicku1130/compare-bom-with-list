@@ -45,7 +45,7 @@ export default function ResultPresent(props) {
       </Row>
       <Row className="mb-2">
         <h4>Recommend to review</h4>
-        <ComponentTable data={recommendItem(bom)} />
+        <ComponentTable data={recommendItem(bom)} exsitedBOM={results} checkExist={true}/>
       </Row>
 
       <Row className="mb-2">

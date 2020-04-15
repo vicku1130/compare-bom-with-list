@@ -12,12 +12,12 @@ export default function FileHandling() {
 
   const receivedNud = (obj) => {
     setNud(obj);
-    setNudFlag(true);
+    //setNudFlag(true);
   };
 
   const receivedBom = (obj) => {
     setBom(obj);
-    setBomFlag(true);
+    //setBomFlag(true);
   };
 
   const transferData = (e) => {
@@ -36,6 +36,7 @@ export default function FileHandling() {
               title="New Component List"
               fileType="NUD"
               callback={(obj) => receivedNud(obj)}
+              setFlag={(bool) => setNudFlag(bool)}
             />
           </Col>
           <Col>
@@ -43,13 +44,14 @@ export default function FileHandling() {
               title="BOM File"
               fileType="BOM"
               callback={(obj) => receivedBom(obj)}
+              setFlag={(bool) => setBomFlag(bool)}
             />
           </Col>
         </Row>
         <div style={{ height: "50px" }} />
         <Row className="d-flex justify-content-center">
           <Button
-            disabled={!nudSet && !bomSet}
+            disabled={!nudSet || !bomSet}
             style={{ width: "50%" }}
             onClick={transferData}
           >
