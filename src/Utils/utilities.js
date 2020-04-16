@@ -28,7 +28,10 @@ export function parseObject(retJson) {
         qty: row.__EMPTY,
         smcPn: row.__EMPTY_1,
         type:
-          row.__EMPTY_1 === null || row.__EMPTY_1 === undefined
+          row.__EMPTY_1 === null ||
+          row.__EMPTY_1 === undefined ||
+          typeof row.__EMPTY_1 !== "string" ||
+          row.__EMPTY_1 instanceof String
             ? ""
             : row.__EMPTY_1.split("-")[0],
         mfg: row.__EMPTY_2,
