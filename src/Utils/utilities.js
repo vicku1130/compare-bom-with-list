@@ -27,7 +27,10 @@ export function parseObject(retJson) {
         item: row["Bill of Materials (BOM) Form"],
         qty: row.__EMPTY,
         smcPn: row.__EMPTY_1,
-        type: row.__EMPTY_1.split("-")[0],
+        type:
+          row.__EMPTY_1 === null || row.__EMPTY_1 === undefined
+            ? ""
+            : row.__EMPTY_1.split("-")[0],
         mfg: row.__EMPTY_2,
         mfgPn: row.__EMPTY_3,
         description: row.__EMPTY_4,
